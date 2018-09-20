@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="base">
+    <xacro:macro name="omni_base" params="name omni_w omni_l omni_h omni_m" >
+        <link name="${name}">
+            <inertial>
+                <xacro:box_inertia m="${omni_m}" x="${omni_l}" y="${omni_w}" z="${omni_h}" />
+
+            </inertial>
+            
+            <visual name="${name}_visual" >
+                <geometry>
+                    <box size="${omni_l} ${omni_w} ${omni_h}" />
+                </geometry>
+                <material name="orange" />
+            </visual>
+
+            <collision name="${name}_collision">
+                <geometry>
+                    <box size="${omni_l} ${omni_w} ${omni_h}" />
+                </geometry>
+            </collision>
+        </link>
+
+        <link name="base_laser_link">
+            <inertial>
+                <xacro:box_inertia m="0.037" x="0.06" y="0.06" z="0.087" />
+            </inertial>
+            <visual name="base_laser_link_visual" >
+                <origin xyz="0 0 0.0115" />
+                <geometry>
+                    <mesh filename="package://omni_description/meshes/hokuyo_utm_30lx.dae" />
+                </geometry>
+            </visual>
+
+            <collision name="base_laser_link_collision">
+                <origin xyz="0 0 0.0115" />
+                <geometry>
+                    <box size="0.06 0.06 0.087" />
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="base_to_laser" type="fixed">
+            <parent link="base_link" />
+            <child link="base_laser_link" />
+            <origin xyz="0 0 ${omni_h / 2 + 0.041}" />
+        </joint>
+
+    </xacro:macro>
+</robot>
+

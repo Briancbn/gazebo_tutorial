@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Process the xacro file to urdf -->
+    <arg name="model" default="$(find omni_description)/urdf/lidar_box.urdf"/>
+
+    <arg name="gui" default="true" />
+
+    <!-- Use the local RVIZ config -->
+    <arg name="rvizconfig" default="$(find omni_description)/rviz/urdf.rviz" />
+
+    <!-- Use the Processed urdf file -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)"/>
+  <param name="use_gui" value="$(arg gui)"/>
+
+
+  <!-- Publish the TF information for the joint -->
+  <!--node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /-->
+  
+  <!-- Update the state of the robot -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+</launch>

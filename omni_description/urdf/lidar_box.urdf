@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<robot name="robot">
+  <link name="base_link">
+    <visual name="base_link_visual">
+      <geometry>
+        <box size="3.0 2.0 0.4"/>
+      </geometry>
+      <material name="orange">
+          <color rgba="1 0.5 0 1"/>
+      </material>
+    </visual>
+    <collision name="base_link_collision">
+      <geometry>
+        <box size="3.0 2.0 0.4"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="base_laser_link">
+    <visual name="base_laser_link_visual">
+      <origin xyz="0 0 0.0115"/>
+      <geometry>
+        <mesh filename="package://omni_description/meshes/hokuyo_utm_30lx.dae"/>
+      </geometry>
+    </visual>
+    <collision name="base_laser_link_collision">
+      <origin xyz="0 0 0.0115"/>
+      <geometry>
+        <box size="0.06 0.06 0.087"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_to_laser" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_laser_link"/>
+    <origin xyz="0 0 0.241"/>
+  </joint>
+</robot>

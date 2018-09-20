@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="omni_description" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen">
+        <rosparam>
+            speed: 0.8
+            turn: 0.8
+        </rosparam>
+    </node>
+</launch>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <link name="base_link">
+    <inertial>
+      <mass value="10.0"/>
+      <inertia ixx="0.346666666667" ixy="0" ixz="0" iyy="0.763333333333" iyz="0" izz="1.08333333333"/>
+    </inertial>
+    <visual name="base_link_visual">
+      <geometry>
+        <box size="3.0 2.0 0.4"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+    <collision name="base_link_collision">
+      <geometry>
+        <box size="3.0 2.0 0.4"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="base_laser_link">
+    <inertial>
+      <mass value="0.037"/>
+      <inertia ixx="0.00093075" ixy="0" ixz="0" iyy="0.00093075" iyz="0" izz="0.0006"/>
+    </inertial>
+    <visual name="base_laser_link_visual">
+      <origin xyz="0 0 0.0115"/>
+      <geometry>
+        <mesh filename="package://omni_description/meshes/hokuyo_utm_30lx.dae"/>
+      </geometry>
+    </visual>
+    <collision name="base_laser_link_collision">
+      <origin xyz="0 0 0.0115"/>
+      <geometry>
+        <box size="0.06 0.06 0.087"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_to_laser" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_laser_link"/>
+    <origin xyz="0 0 0.241"/>
+  </joint>
+</robot>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+    <!-- Using macro and math to simplify the calculation of the inertia -->
+    <xacro:include filename="$(find leg_description)/urdf/common_inertia_list.urdf.xacro"/>
+    
+
+    <!-- Predefine the color for the material to be used -->
+    <xacro:include filename="$(find omni_description)/urdf/materials.xacro" />
+
+    <!-- Use macro to generalize the robot property -->
+    <xacro:include filename="$(find omni_description)/urdf/base.urdf.xacro" />
+
+
+    <link name="base_footprint" />
+    
+    <joint name="footprint_to_base" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin xyz="0 0 0.2"/>
+    </joint>
+    
+    <!-- Create an omni_base -->
+    <xacro:omni_base name="base_link" omni_w="2.0" omni_l="3.0" omni_h="0.4" omni_m="10.0"/>
+    
+
+    <!-- Include the components unique to sdf (Gazebo) -->
+    <xacro:include filename="$(find omni_description)/urdf/omni.gazebo" />
+
+</robot>
+
