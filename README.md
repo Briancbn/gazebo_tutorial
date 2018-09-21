@@ -48,7 +48,7 @@ Code for the box:
 ```
 To visualize the box, run:
 ```bash
-roslaunch omni_description display.launch 
+roslaunch omni_description display.launch model:=$(find omni_description)/urdf/box.urdf
 ```
 
 #### Task 2: Lidar and Box (Joint)
